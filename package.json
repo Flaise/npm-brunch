@@ -1,0 +1,13 @@
+{
+    "name": "npm-brunch",
+    "author": {
+        "name": "Flaise"
+    },
+    "version": "0.0.1",
+    "scripts": {
+        "test": "node ./node_modules/jasmine/bin/jasmine.js"
+    },
+    "devDependencies": {
+        "jasmine": "2.2.1"
+    }
+}
