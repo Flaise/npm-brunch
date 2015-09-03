@@ -63,6 +63,8 @@ function recursiveDependenciesOf(source, sourcePath, rootPath, adapters, result,
             return
         
         var data = fs.readFileSync(resolvedDep.path).toString()
+        if(path.extname(resolvedDep.path).toLowerCase() === '.json')
+            data = 'module.exports = ' + data
         
         if(dep in adapters)
             data = adapters[dep](data)
