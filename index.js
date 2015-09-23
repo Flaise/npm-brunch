@@ -111,7 +111,14 @@ function getNodeModule(sourcePath, modPath) {
                              
         if(fs.existsSync(joinedModPath + '/package.json')) {
             var info = JSON.parse(fs.readFileSync(joinedModPath + '/package.json').toString())
-            if(info.main) {
+            if(typeof info.browser === 'string') {
+                possibilities.push({path: path.join(joinedModPath, info.browser), alias: joinedModPath})
+                possibilities.push({path: path.join(joinedModPath, info.browser) + '.js', alias: joinedModPath})
+                possibilities.push({path: path.join(joinedModPath, info.browser) + '.json', alias: joinedModPath})
+                possibilities.push({path: path.join(joinedModPath, info.browser, 'index.js'), alias: joinedModPath})
+                possibilities.push({path: path.join(joinedModPath, info.browser, 'index.json'), alias: joinedModPath})
+            }
+            if(typeof info.main === 'string') {
                 possibilities.push({path: path.join(joinedModPath, info.main), alias: joinedModPath})
                 possibilities.push({path: path.join(joinedModPath, info.main) + '.js', alias: joinedModPath})
                 possibilities.push({path: path.join(joinedModPath, info.main) + '.json', alias: joinedModPath})
